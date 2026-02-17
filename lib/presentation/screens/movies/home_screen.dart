@@ -33,6 +33,9 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     super.initState();
 
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+    ref.read(popularMoviesProvider.notifier).loadNextPage();
+    ref.read(topRatedMoviesProvider.notifier).loadNextPage();
+    ref.read(upComingMoviesProvider.notifier).loadNextPage();
   }
 
 
@@ -41,23 +44,78 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideShowProvider);
+    final popularMovies = ref.watch(popularMoviesProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesProvider);
+    final upComingMovies = ref.watch(upComingMoviesProvider);
 
-    return Column(
-      children: [
-        const CustomAppbar(),
-        
-        MoviesSlideShow(
-          movies: slideShowMovies),
+    return CustomScrollView(
+      slivers: [
 
-        MovieHorizontalListview(
-          movies: nowPlayingMovies,
-          title: 'En cines',
-          subTitle: 'Lunes 20',
-          loadNextPage: () => {
-            ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()
-          },
-        )
-      ],
+        const SliverAppBar(
+          floating: true,
+          flexibleSpace: FlexibleSpaceBar(
+            title: CustomAppbar(),
+          ),
+        ),
+
+        SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+
+            return Column(
+              children: [
+
+                //const CustomAppbar(),
+                
+                MoviesSlideShow(
+                  movies: slideShowMovies),
+            
+                MovieHorizontalListview(
+                  movies: nowPlayingMovies,
+                  title: 'En cines',
+                  subTitle: 'Lunes 20',
+                  loadNextPage: () => {
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()
+                  },
+                ),
+            
+                MovieHorizontalListview(
+                  movies: upComingMovies,
+                  title: 'Proximamente',
+                  subTitle: 'Este mes',
+                  loadNextPage: () => {
+                    ref.read(upComingMoviesProvider.notifier).loadNextPage()
+                  },
+                ),
+            
+                MovieHorizontalListview(
+                  movies: popularMovies,
+                  title: 'Populares',
+                  subTitle: 'Top',
+                  loadNextPage: () => {
+                    ref.read(popularMoviesProvider.notifier).loadNextPage()
+                  },
+                ),
+            
+                MovieHorizontalListview(
+                  movies: topRatedMovies,
+                  title: 'Mejor valoración',
+                  //subTitle: 'Lunes 20',
+                  loadNextPage: () => {
+                    ref.read(topRatedMoviesProvider.notifier).loadNextPage()
+                  },
+                ),
+
+                SizedBox(
+                  height: 12,
+                )
+            
+              ],
+            );
+          },childCount: 1
+          )),
+
+      ]
+      
     );
 
   }
