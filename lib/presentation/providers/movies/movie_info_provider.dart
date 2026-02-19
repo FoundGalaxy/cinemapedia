@@ -12,6 +12,8 @@ final movieInfoProvider = StateNotifierProvider<MovieMapNotifier, Map<String, Mo
 });
 
 
+
+
 typedef GetMovieCallback = Future<Movie>Function(String movieId);
 
 class MovieMapNotifier extends StateNotifier<Map<String,Movie>>{
