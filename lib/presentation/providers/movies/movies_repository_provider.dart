@@ -7,5 +7,3 @@ final movieRepositoryProvider = Provider((ref){
 
     return MovieRepositoryImpl(TheMovidedbDatasource());
 });
-
-  
