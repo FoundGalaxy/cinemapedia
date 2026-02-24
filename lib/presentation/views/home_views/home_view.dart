@@ -1,35 +1,20 @@
-import 'package:cinemapedia/presentation/providers/providers.dart';
-import 'package:cinemapedia/presentation/widgets/widgets.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatelessWidget {
-
-  static const name = 'home-screen';
-
-  final Widget childView;
+import '../../providers/providers.dart';
+import '../../widgets/widgets.dart';
 
 
-  const HomeScreen({super.key, required this.childView});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: childView,
-      bottomNavigationBar: const CustomBottomNavigation(),
-      //bottomNavigationBar: Placeholder(),
-      );
-  }
-}
-
-class _HomeView extends ConsumerStatefulWidget {
-  const _HomeView();
+class HomeView extends ConsumerStatefulWidget {
+  const HomeView({super.key});
 
   @override
-  _HomeViewState createState() => _HomeViewState();
+  HomeViewState createState() => HomeViewState();
 }
 
-class _HomeViewState extends ConsumerState<_HomeView> {
+class HomeViewState extends ConsumerState<HomeView> {
 
   @override
   void initState() {
@@ -41,9 +26,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
     ref.read(upComingMoviesProvider.notifier).loadNextPage();
   }
-
-
-  @override
+  
+@override
   Widget build(BuildContext context) {
 
     final firstLoading = ref.watch(firstLoadingProvider);

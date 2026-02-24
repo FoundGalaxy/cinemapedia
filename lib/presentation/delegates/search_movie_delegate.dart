@@ -25,7 +25,7 @@ class SearchMovieDelegate extends SearchDelegate<Movie?>{
       searchFieldLabel: 'Buscar Peliculas',
       textInputAction: TextInputAction.search
     );
-
+ 
   void clearStreams(){
     debouncedMovies.close();
   }
