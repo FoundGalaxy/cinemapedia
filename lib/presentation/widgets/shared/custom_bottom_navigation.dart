@@ -30,7 +30,7 @@ class CustomBottomNavigation extends StatelessWidget {
         context.go('/');
       break;
       case 1:
-        context.go('');
+        context.go('/');
       break;
       case 2: 
         context.go('/favorites');

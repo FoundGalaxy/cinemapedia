@@ -6,9 +6,8 @@ import '../../providers/providers.dart';
 import '../../widgets/widgets.dart';
 
 
-
 class HomeView extends ConsumerStatefulWidget {
-  const HomeView({super.key});
+  const HomeView();
 
   @override
   HomeViewState createState() => HomeViewState();
@@ -26,8 +25,9 @@ class HomeViewState extends ConsumerState<HomeView> {
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
     ref.read(upComingMoviesProvider.notifier).loadNextPage();
   }
-  
-@override
+
+
+  @override
   Widget build(BuildContext context) {
 
     final firstLoading = ref.watch(firstLoadingProvider);
