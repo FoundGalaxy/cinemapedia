@@ -1,22 +1,15 @@
-
-
 import 'package:cinemapedia/presentation/screens/screens.dart';
 import 'package:go_router/go_router.dart';
-import '../../presentation/views/views.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/home/0',
   routes: [
-
-    ShellRoute(
-      builder: (context, state, child){
-        return HomeScreen(childView: child);
-      },
-      routes: [
         GoRoute(
-          path: '/',
+          path: '/home/:page',
+          name: HomeScreen.name,
           builder: (context, state){
-            return const HomeView();
+            final pageIndex = int.parse(state.pathParameters['page']??'0');
+            return HomeScreen(pageIndex: pageIndex);
           },
           routes: [
             GoRoute(
@@ -32,14 +25,12 @@ final appRouter = GoRouter(
         ),
 
         GoRoute(
-          path: '/favorites',
-          builder: (context, state){
-            return const FavoritesView();
-          }
+          path: '/',
+          redirect: (_, __) => '/home/0',
           )
       ]
 
-    ),
+    );
 
 
     //Rutas padre hijo
@@ -60,6 +51,3 @@ final appRouter = GoRouter(
       ),
       ]
     ),*/
-
-  ]
-);
